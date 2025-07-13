@@ -1,0 +1,21 @@
+<nav class="bg-[#121a26] text-white py-6 px-8 flex justify-between items-center w-full shadow">
+    <a href="/" class="text-2xl font-extrabold tracking-wide">Climate Solutions</a>
+    <div class="space-x-8 text-lg font-semibold">
+        <a 
+            href="/" 
+            class="<%= (page == '/' || page == '/home') ? 'underline' : '' %>">
+            Home
+        </a>
+        <a 
+            href="/solutions/projects" 
+            class="<%= (page == '/solutions/projects') ? 'underline' : '' %>">
+            View Projects
+        </a>
+        <a 
+            href="/about" 
+            class="<%= (page == '/about') ? 'underline' : '' %>">
+            About
+        </a>
+    </div>
+</nav>
+

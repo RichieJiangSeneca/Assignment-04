@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="garden">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <div class="flex flex-col items-center w-full">
+
+<%- include('partials/navbar', { page: '/solutions/projects' }) %>
+
+<div class="hero bg-base-200 p-6 w-full rounded-lg mb-6">
+  <div class="hero-content text-center">
+    <div class="max-w-md">
+      <h1 class="text-5xl font-bold">Projects</h1>
+      <p class="py-6">Browse the current list of Projects in our database. Click the sector to filter by:</p>
+      <% sectors.forEach(sector => { %>
+        <a href="/solutions/projects?sector=<%= sector.sector_name %>" class="btn btn-xs btn-primary mx-1"><%= sector.sector_name %></a>
+      <% }); %>
+    </div>
+  </div>
+</div>
+
+<table class="table table-zebra w-full">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Sector</th>
+      <th>Summary</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% projects.forEach(function(project) { %>
+      <tr>
+        <td><%= project.title %></td>
+        <td>
+          <% 
+            let sector = sectors.find(s => s.id === project.sector_id);
+          %>
+          <a href="/solutions/projects?sector=<%= sector.sector_name %>" class="btn btn-xs btn-outline">
+            <%= sector.sector_name %>
+          </a>
+        </td>
+        <td><%= project.summary_short %></td>
+        <td>
+          <a href="/solutions/projects/<%= project.id %>" class="btn btn-xs btn-primary">details</a>
+        </td>
+      </tr>
+    <% }); %>
+  </tbody>
+</table>

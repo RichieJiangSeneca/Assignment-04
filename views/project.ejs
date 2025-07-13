@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="/css/main.css" />
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= project.title %> - Climate Solutions</title>
+    <link href="/css/main.css" rel="stylesheet" />
+</head>
+
+<body class="bg-base-100 text-base-content">
+
+    <%- include('partials/navbar', { page: '' }) %>
+
+    <main class="max-w-7xl mx-auto mt-12 p-6">
+        <h1 class="text-4xl font-bold mb-2"><%= project.title %></h1>
+        <% if (project.feature_img_url) { %>
+        <img src="<%= project.feature_img_url %>" alt="<%= project.title %>" class="rounded-lg mb-6 w-full max-h-96 object-cover" />
+        <% } %>
+
+        <% if (project.intro_short) { %>
+        <section class="mb-6">
+            <h2 class="text-2xl font-semibold">Introduction</h2>
+            <p><%= project.intro_short %></p>
+        </section>
+        <% } %>
+
+        <% if (project.impact) { %>
+        <section class="mb-6">
+            <h2 class="text-2xl font-semibold">Impact</h2>
+            <p><%= project.impact %></p>
+        </section>
+        <% } %>
+
+        <a href="<%= project.original_source_url %>" target="_blank" 
+            class="btn btn-primary mb-6 inline-flex items-center justify-center bg-grey-400 text-black ml-6">
+            More Information
+        </a>
+
+        <a href="#" onclick="history.back(); return false;" 
+            class="btn btn-secondary inline-flex items-center justify-center bg-grey-400 text-black ml-4">
+            Back
+        </a>
+
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch("https://dummyjson.com/quotes/random")
+                .then(res => res.json())
+                .then(data => {
+                    const quoteBlock = document.createElement('blockquote');
+                    quoteBlock.textContent = `"${data.quote}"`;
+                    quoteBlock.className = 'italic text-gray-600 mt-8';
+
+                    const quoteAuthor = document.createElement('div');
+                    quoteAuthor.textContent = `– ${data.author}`;
+                    quoteAuthor.className = 'mt-2 text-gray-400';
+
+                    const mainDiv = document.querySelector('main');
+                    mainDiv.appendChild(quoteBlock);
+                    mainDiv.appendChild(quoteAuthor);
+                })
+                .catch(() => {
+                    console.error('Failed to load quote');
+                });
+        });
+    </script>
+</body>
+
+</html>
